@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--
+=======================================================================
+GOLD COSMETICS - HOME PAGE
+=======================================================================
+This is the HTML template for the home page. It uses:
+1. HTML - Structure of the page
+2. Bootstrap - Makes it look pretty and work on mobile
+3. Thymeleaf - Lets us insert Java data into HTML
+
+WHAT IS THYMELEAF?
+Thymeleaf uses special attributes like th:text="${variable}" to insert
+data from the controller into the HTML. Think of it as mail merge for web pages!
+
+=======================================================================
+-->
+
+<head>
+    <!-- META TAGS: Information about the page -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TITLE: What shows in the browser tab -->
+    <title th:text="${storeName} + ' - Home'">Gold Cosmetics - Home</title>
+    
+    <!-- BOOTSTRAP CSS: Makes everything look modern and responsive -->
+    <!-- We're loading it from a CDN (Content Delivery Network) - like a library on the internet -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CUSTOM CSS: Our own styling -->
+    <style>
+        /* Make the body fill the whole screen */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Hero section styling */
+        .hero-section {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 60px 40px;
+            margin: 40px 0;
+        }
+        
+        /* Shop card styling */
+        .shop-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: transform 0.3s;
+        }
+        
+        .shop-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Button styling */
+        .btn-gold {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 25px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-gold:hover {
+            transform: scale(1.05);
+            color: white;
+        }
+        
+        /* Footer styling */
+        .footer {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            padding: 20px 0;
+            margin-top: auto;
+        }
+        
+        /* Emoji icons */
+        .emoji-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+    =======================================================================
+    NAVIGATION BAR
+    =======================================================================
+    This is the menu at the top of every page
+    -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: rgba(0,0,0,0.3);">
+        <div class="container">
+            <!-- Logo/Brand name -->
+            <a class="navbar-brand fw-bold fs-4" href="/" th:text="${storeName}">
+                Gold Cosmetics
+            </a>
+            
+            <!-- Hamburger menu for mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <!-- Navigation links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- 
+    =======================================================================
+    MAIN CONTENT AREA
+    =======================================================================
+    -->
+    <div class="container flex-grow-1">
+        
+        <!-- HERO SECTION -->
+        <div class="hero-section text-center">
+            <div class="emoji-icon">💎</div>
+            
+            <!-- This th:text="${welcomeMessage}" pulls data from the controller! -->
+            <h1 class="display-4 fw-bold mb-4" th:text="${welcomeMessage}">
+                Welcome to Gold Cosmetics
+            </h1>
+            
+            <p class="lead text-muted mb-4">
+                Your trusted beauty destination serving Naivasha and Karagita
+            </p>
+            
+            <div class="d-flex gap-3 justify-content-center">
+                <a href="/products" class="btn btn-gold btn-lg">
+                    🛍️ Shop Now
+                </a>
+                <a href="/about" class="btn btn-outline-secondary btn-lg">
+                    📖 Learn More
+                </a>
+            </div>
+        </div>
+        
+        <!-- SHOP LOCATIONS SECTION -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="shop-card text-center">
+                    <div class="emoji-icon">🏪</div>
+                    <h3 class="fw-bold" th:text="${shop1}">Naivasha Town</h3>
+                    <p class="mb-0">Visit our main store in Naivasha Town for the complete Gold Cosmetics experience!</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="shop-card text-center">
+                    <div class="emoji-icon">🏬</div>
+                    <h3 class="fw-bold" th:text="${shop2}">Karagita</h3>
+                    <p class="mb-0">Find us in Karagita for all your beauty needs with personalized service!</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- FEATURES SECTION -->
+        <div class="row mt-5">
+            <div class="col-md-4 text-center text-white mb-4">
+                <div class="fs-1 mb-3">🚚</div>
+                <h5 class="fw-bold">Fast Delivery</h5>
+                <p>Track your orders from purchase to your doorstep</p>
+            </div>
+            
+            <div class="col-md-4 text-center text-white mb-4">
+                <div class="fs-1 mb-3">💳</div>
+                <h5 class="fw-bold">M-Pesa Payments</h5>
+                <p>Easy and secure payments via Paystack</p>
+            </div>
+            
+            <div class="col-md-4 text-center text-white mb-4">
+                <div class="fs-1 mb-3">✨</div>
+                <h5 class="fw-bold">Quality Products</h5>
+                <p>Authentic beauty products you can trust</p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- 
+    =======================================================================
+    FOOTER
+    =======================================================================
+    -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="mb-0">
+                &copy; <span th:text="${currentYear}">2025</span> 
+                <span th:text="${storeName}">Gold Cosmetics</span>. 
+                All rights reserved. | Built with 💛 by Angela
+            </p>
+        </div>
+    </footer>
+    
+    <!-- 
+    =======================================================================
+    JAVASCRIPT LIBRARIES
+    =======================================================================
+    Bootstrap needs JavaScript for interactive components (dropdowns, modals, etc.)
+    -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Success message when page loads -->
+    <script>
+        // This runs when the page finishes loading
+        window.addEventListener('load', function() {
+            console.log('🌟 Gold Cosmetics system loaded successfully!');
+            console.log('💎 Welcome to your e-commerce platform, Angela!');
+        });
+    </script>
+    
+</body>
+</html>
+
+<!--
+=======================================================================
+NOTES FOR ANGELA:
+=======================================================================
+1. th:text="${variable}" - Inserts text from controller into HTML
+2. th:href="@{/url}" - Creates links (we'll use this later)
+3. th:each="item : ${items}" - Loops through lists (we'll use for products)
+4. Bootstrap classes like "container", "row", "col-md-6" make layouts easy
+5. The page is fully responsive - try resizing your browser!
+
+NEXT STEPS:
+- We'll create more pages (about, products, login, register)
+- We'll add product listings from the database
+- We'll style everything to match Gold Cosmetics branding
+
+Questions? Just ask! 😊
+=======================================================================
+-->

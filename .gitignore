@@ -1,0 +1,90 @@
+# =======================================================================
+# GOLD COSMETICS - .gitignore
+# =======================================================================
+# This file tells Git which files to IGNORE (not upload to GitHub)
+#
+# WHY?
+# Some files are temporary, personal, or too large to upload.
+# For example, we don't upload compiled code or database passwords.
+# =======================================================================
+
+# -----------------------------------------------------------------------
+# MAVEN BUILD FILES
+# -----------------------------------------------------------------------
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# -----------------------------------------------------------------------
+# IDE FILES (VS Code, IntelliJ, Eclipse)
+# -----------------------------------------------------------------------
+# These are personal settings and should not be shared
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.settings/
+.classpath
+.project
+
+# -----------------------------------------------------------------------
+# OPERATING SYSTEM FILES
+# -----------------------------------------------------------------------
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# -----------------------------------------------------------------------
+# LOG FILES
+# -----------------------------------------------------------------------
+*.log
+logs/
+
+# -----------------------------------------------------------------------
+# TEMPORARY FILES
+# -----------------------------------------------------------------------
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------
+# SENSITIVE INFORMATION
+# -----------------------------------------------------------------------
+# NEVER commit passwords or API keys!
+application-local.properties
+application-secrets.properties
+*.env
+
+# -----------------------------------------------------------------------
+# COMPILED CLASS FILES
+# -----------------------------------------------------------------------
+*.class
+
+# -----------------------------------------------------------------------
+# PACKAGE FILES
+# -----------------------------------------------------------------------
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# -----------------------------------------------------------------------
+# NOTES FOR ANGELA:
+# -----------------------------------------------------------------------
+# 1. This file is IMPORTANT for security - it keeps passwords out of GitHub
+# 2. Always check this file before pushing to GitHub
+# 3. If you accidentally commit a password, it's PUBLIC FOREVER!
+# 4. When in doubt, add files here rather than risk exposing secrets
+# =======================================================================
