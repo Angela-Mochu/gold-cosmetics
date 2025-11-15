@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Gold Cosmetics</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .register-container {
+            max-width: 500px;
+            margin: 40px auto;
+        }
+        
+        .register-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+        
+        .brand-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .brand-header h1 {
+            color: #764ba2;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .brand-header .emoji {
+            font-size: 3rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #764ba2;
+            box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+        }
+        
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            border-radius: 25px;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(118, 75, 162, 0.4);
+            color: white;
+        }
+        
+        .alert {
+            border-radius: 10px;
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .login-link a {
+            color: #764ba2;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .invalid-feedback {
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="register-container">
+            <div class="register-card">
+                
+                <!-- BRAND HEADER -->
+                <div class="brand-header">
+                    <div class="emoji">💎</div>
+                    <h1>Create Account</h1>
+                    <p class="text-muted">Join Gold Cosmetics today</p>
+                </div>
+                
+                <!-- ERROR MESSAGE -->
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <strong>❌ Error:</strong> <span th:text="${error}"></span>
+                </div>
+                
+                <!-- REGISTRATION FORM -->
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    
+                    <!-- FULL NAME -->
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="fullName" 
+                               th:field="*{fullName}"
+                               th:classappend="${#fields.hasErrors('fullName')} ? 'is-invalid' : ''"
+                               placeholder="Enter your full name"
+                               required>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('fullName')}" 
+                             th:errors="*{fullName}"></div>
+                    </div>
+                    
+                    <!-- USERNAME -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username *</label>
+                        <input type="text" 
+                               class="form-control" 
+                               id="username" 
+                               th:field="*{username}"
+                               th:classappend="${#fields.hasErrors('username')} ? 'is-invalid' : ''"
+                               placeholder="Choose a username"
+                               required
+                               minlength="3"
+                               maxlength="50">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" 
+                             th:errors="*{username}"></div>
+                        <small class="text-muted">3-50 characters, will be used for login</small>
+                    </div>
+                    
+                    <!-- EMAIL -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address *</label>
+                        <input type="email" 
+                               class="form-control" 
+                               id="email" 
+                               th:field="*{email}"
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
+                               placeholder="your.email@example.com"
+                               required>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" 
+                             th:errors="*{email}"></div>
+                    </div>
+                    
+                    <!-- PASSWORD -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password *</label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="password" 
+                               th:field="*{password}"
+                               th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
+                               placeholder="Create a strong password"
+                               required
+                               minlength="6">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" 
+                             th:errors="*{password}"></div>
+                        <small class="text-muted">At least 6 characters</small>
+                    </div>
+                    
+                    <!-- PHONE -->
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="tel" 
+                               class="form-control" 
+                               id="phone" 
+                               th:field="*{phone}"
+                               placeholder="0712345678">
+                        <small class="text-muted">For M-Pesa payments and order notifications</small>
+                    </div>
+                    
+                    <!-- DELIVERY ADDRESS -->
+                    <div class="mb-3">
+                        <label for="deliveryAddress" class="form-label">Delivery Address</label>
+                        <textarea class="form-control" 
+                                  id="deliveryAddress" 
+                                  th:field="*{deliveryAddress}"
+                                  rows="2"
+                                  placeholder="Your delivery address (can be updated later)"></textarea>
+                    </div>
+                    
+                    <!-- SUBMIT BUTTON -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-register">
+                            ✨ Create Account
+                        </button>
+                    </div>
+                    
+                </form>
+                
+                <!-- LOGIN LINK -->
+                <div class="login-link">
+                    <p>Already have an account? <a href="/login">Login here</a></p>
+                </div>
+                
+                <!-- BACK TO HOME -->
+                <div class="text-center mt-3">
+                    <a href="/" class="text-muted" style="text-decoration: none;">
+                        ← Back to Home
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Log when page loads
+        console.log('📝 Registration form loaded');
+        
+        // Basic form validation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            
+            if (password.length < 6) {
+                e.preventDefault();
+                alert('Password must be at least 6 characters long');
+                return false;
+            }
+            
+            console.log('✅ Form validation passed, submitting...');
+        });
+    </script>
+</body>
+</html>
+
